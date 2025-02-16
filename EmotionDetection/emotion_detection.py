@@ -8,7 +8,7 @@ def emotion_detector(text_to_analyse):
     response = requests.post(URL, json = Input, headers = Headers)
     dictionary= json.loads(response.text)['emotionPredictions'][0]['emotion']
     dominant = max(dictionary, key = dictionary.get)
-    dictionary['domiant_emotion'] = dominant
+    dictionary['dominant_emotion'] = dominant
     
 
     return dictionary
