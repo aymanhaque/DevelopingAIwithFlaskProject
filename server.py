@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, abort
 from EmotionDetection import emotion_detection
 app = Flask(__name__)
 
@@ -9,6 +9,8 @@ def hello_world():
 @app.route('/emotionDetector')
 def emotionOutput():
     response = request.args.get('textToAnalyze')
+    if response =="":
+        abort(400)
     emotions = emotion_detection.emotion_detector(response)
     statement = f"""For the given statement, the system response is 
         'anger': {emotions['anger']}, 
@@ -20,3 +22,7 @@ def emotionOutput():
         The dominant emotion is {emotions['dominant_emotion']}.
         """
     return statement
+
+@app.errorhandler(400)
+def bad_request(e):
+    return "Invalid request. Please check your input.", 400
