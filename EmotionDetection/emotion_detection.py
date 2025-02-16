@@ -6,6 +6,15 @@ def emotion_detector(text_to_analyse):
     Input = { "raw_document": { "text": text_to_analyse } }
 
     response = requests.post(URL, json = Input, headers = Headers)
+    if(response.status_code == 400):
+        Input['raw_document']["text"] = "None"
+        response = requests.post(URL, json = Input, headers = Headers)
+
+        errorDict = json.loads(response.text)['emotionPredictions'][0]['emotion']
+        for i in errorDict.keys():
+            errorDict[i] = None
+        errorDict['dominant_emotion'] = None
+        return errorDict
     dictionary= json.loads(response.text)['emotionPredictions'][0]['emotion']
     dominant = max(dictionary, key = dictionary.get)
     dictionary['dominant_emotion'] = dominant
@@ -13,5 +22,5 @@ def emotion_detector(text_to_analyse):
 
     return dictionary
 
-if("__name__" == "__main__"):
-    print(emotion_detector('I hate working long hours'))
+if(__name__ == "__main__"):
+    print(emotion_detector(''))

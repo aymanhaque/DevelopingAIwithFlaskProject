@@ -9,9 +9,9 @@ def hello_world():
 @app.route('/emotionDetector')
 def emotionOutput():
     response = request.args.get('textToAnalyze')
-    if response =="":
-        abort(400)
     emotions = emotion_detection.emotion_detector(response)
+    if(emotions['dominant_emotion'] == None):
+        abort(400)
     statement = f"""For the given statement, the system response is 
         'anger': {emotions['anger']}, 
         'disgust':{emotions['disgust']}, 
@@ -25,4 +25,5 @@ def emotionOutput():
 
 @app.errorhandler(400)
 def bad_request(e):
-    return "Invalid request. Please check your input.", 400
+
+    return "Invalid text! Please try again!", 400
