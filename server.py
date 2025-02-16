@@ -1,4 +1,3 @@
-# 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
 
 from flask import Flask, request
 from EmotionDetection import emotion_detection
