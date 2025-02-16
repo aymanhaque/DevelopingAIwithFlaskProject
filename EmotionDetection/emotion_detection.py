@@ -13,4 +13,5 @@ def emotion_detector(text_to_analyse):
 
     return dictionary
 
-print(emotion_detector('I hate working long hours'))
+if("__name__" == "__main__"):
+    print(emotion_detector('I hate working long hours'))
