@@ -13,4 +13,4 @@ def emotion_detector(text_to_analyse):
 
     return dictionary
 
-print(emotion_detector(' I am so happy I am doing this'))
+print(emotion_detector('I hate working long hours'))

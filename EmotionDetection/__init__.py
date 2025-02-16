@@ -1,1 +1,1 @@
-from emotion_detection import *
+from . import emotion_detection
